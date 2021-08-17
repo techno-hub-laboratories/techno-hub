@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!--<link rel="stylesheet" th:href="@{/css/homepage.css}">-->
+
+	<!-- RazorPay Script -->
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" th:href="@{/images/favicon.png}" />
+
+	<!-- google fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&family=Otomanopee+One&display=swap"
+		rel="stylesheet">
+
+	<title>Home</title>
+	<style>
+		body {
+			background-color: #dedede;
+			margin: 0px;
+			padding: 0px;
+			scroll-behavior: auto;
+		}
+
+		/* navbar custom css and media query */
+		.navbar-brand {
+			position: absolute;
+		}
+
+		.signoutbtn {
+			position: absolute;
+			right: 3rem;
+		}
+
+		.signinbtn {
+			position: absolute;
+			right: 3rem;
+		}
+
+		@media screen and (max-width: 990px) {
+			.navbar-brand {
+				position: static;
+			}
+
+			.signoutbtn {
+				position: static;
+			}
+
+			.signinbtn {
+				position: static;
+			}
+		}
+
+		/* home page img css and media query */
+
+		.homeimg {
+			height: 650px;
+			opacity: .5;
+		}
+
+		@media screen and (max-width: 990px) {
+			.homeimg {
+				height: 500px;
+			}
+		}
+
+		@media screen and (max-width: 750px) {
+			.homeimg {
+				height: 350px;
+			}
+		}
+
+		/* register custom box  */
+		.registerbox {
+			box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.192);
+			background-color: transparent;
+			width: 80%;
+			border-radius: 20px;
+			height: 15rem;
+			margin-top: 6rem;
+			margin-bottom: 2rem;
+		}
+
+		/* custom steps display */
+		.tooltipdiv {
+			border: solid 1px #a7a6a6;
+			height: 150px;
+			background-color: #dedede;
+			width: 80%;
+			margin: auto;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.192)
+		}
+
+		.changetooltipdiv {
+			border: solid 1px #0EDC8D;
+			height: 150px;
+			background-color: #0EDC8D;
+			width: 80%;
+			margin: auto;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0px 0px 20px 0px #0EDC8D
+		}
+
+		.progressbar {
+			height: 70px;
+			width: 5px;
+			background-color: transparent;
+			border: 1px solid #a7a6a6;
+			overflow: hidden;
+		}
+
+		#mybar-1 {
+			width: 6px;
+			background-color: #0EDC8D;
+		}
+
+		#mybar-2 {
+			width: 6px;
+			background-color: #0EDC8D;
+		}
+
+		#mybar-3 {
+			width: 6px;
+			background-color: #0EDC8D;
+		}
+
+
+		/* utility functions */
+		.font1 {
+			font-family: 'Noto Sans JP', sans-serif;
+		}
+
+		.font2 {
+			font-family: 'Otomanopee One', sans-serif;
+		}
+
+		.hover {
+			transition: .5s;
+		}
+
+		.hover:hover {
+			transform: scale(1.3);
+		}
+
+		#thought::after {
+			content: "- Michael Jordan";
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #142f44;">
+		<div class="container-fluid">
+			<a class="mx-3 navbar-brand text-white" href="/">TECHNO-HUB</a>
+			<button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse " id="navbarSupportedContent">
+				<ul class="navbar-nav d-flex align-items-center justify-content-center fs-5" style="width: 100%;">
+					<li class="nav-item mx-2">
+						<a class="nav-link active text-white" aria-current="page" href="/">Home</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-white" href="/services">Services</a>
+					</li>
+					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
+						<form action="#" method="post" th:action="@{/user/profile}">
+							<button type="submit" class="nav-link text-white border-0"
+								style="background-color: transparent;">Profile</button>
+							<input type="text" name="Email" th:value="${#authentication.name}" hidden>
+							<!-- <a class="nav-link text-white"
+								th:href="@{~/profile/(username=${#authentication.name})}">Profile</a> -->
+						</form>
+					</li>
+					<a sec:authorize="isAnonymous()" class="signinbtn my-3" href="/login">
+						<button button type="button" class="btn btn-outline-warning ">
+							<img src="https://img.icons8.com/ios-filled/22/000000/sign-up-in-calendar.png"
+								alt="Sign-in Icon" class="d-inline-block align-text-middle" style="filter: invert(1);">
+							Sign-In
+						</button>
+					</a>
+					<a sec:authorize="isAuthenticated()" class="signoutbtn my-3" href="/logout">
+						<button button type="button" class="btn btn-outline-warning ">
+							<img src="https://img.icons8.com/ios-filled/22/000000/sign-up-in-calendar.png"
+								alt="Sign-in Icon" class="d-inline-block align-text-middle" style="filter: invert(1);">
+							Sign-Out
+						</button>
+					</a>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<section class="container">
+		<div class="card bg-dark text-white">
+			<!-- th:src="@{/images/meeting-coaching.jpg}" -->
+			<img th:src="@{/images/mentoring.jpg}" class="card-img homeimg" alt="...">
+			<div class="card-img-overlay text-center d-flex flex-column align-items-center justify-content-center">
+				<h1 class="card-title mb-4">Welcome to Techno-Hub</h1>
+				<h5 class="card-text fw-bold">"A coach is someone that sees beyond your limits and guides
+					you to
+					greatness!"<br>
+				</h5>
+				<div id="thought"></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="container">
+		<div class="row py-5">
+			<div class="col-md-7 order-2 order-md-1 container">
+				<div class="my-5">
+					<h2 class=" text-reset text-center">How it works ?</h2>
+					<!-- <h1 class="text-center my-2">Simple Steps To Success</h1> -->
+					<h5 class="text-muted text-center mb-4">It all starts with a single first step</h5>
+					<p class="my-5 lh-lg text-center mb-4">Igniting curiosity, developing research-oriented mindset for
+						continuous learning and helping millions achieve their goals through mentoring support</p>
+				</div>
+				<div class="mx-auto p-2 d-flex flex-column justify-content-center align-items-center registerbox">
+					<p class="fs-1 font2">Ready to start?</p>
+					<a sec:authorize="isAnonymous()" href="/login" class="p-0 mx-auto"
+						style="width: fit-content;"><button type="button" class="btn my-3 px-4 fw-bold text-white hover"
+							style="background-color: #0EDC8D;">REGISTER</button></a>
+					<a sec:authorize="isAuthenticated()" href="/user/counseling-form" class="p-0 mx-auto"
+						style="width: fit-content;"><button type="button" class="btn my-3 px-4 fw-bold text-white hover"
+							style="background-color: #0EDC8D;">Let's Go</button></a>
+					<!-- <p class="lh-lg mt-3">We'll contact you shortly.</p> -->
+				</div>
+			</div>
+			<div class="col-md-5 order-1 order-md-2">
+				<div class="container row">
+					<div id="stepbox" class="col-sm-12 d-flex align-items-center justify-content-center flex-column">
+						<div id="tooltip-1" class="row tooltipdiv justify-content-center align-items-center">
+							<h4 class="text-center font2 my-0">Sign-Up your Account</h4>
+							<a sec:authorize="isAnonymous()" href="/login" class="p-0 mx-auto"
+								style="width: fit-content; "><button type="button"
+									class="btn btn-outline-danger m-0">Sign-Up</button></a>
+						</div>
+						<div class="progressbar">
+							<div id="mybar-1"></div>
+						</div>
+						<div id="tooltip-2" class="row tooltipdiv justify-content-center align-items-center">
+							<h4 class="text-center font2">Choose Service</h4>
+						</div>
+						<div class="progressbar">
+							<div id="mybar-2"></div>
+						</div>
+						<div id="tooltip-3" class="row tooltipdiv justify-content-center align-items-center">
+							<h4 class="text-center font2">Pay the Fees</h4>
+						</div>
+						<div class="progressbar">
+							<div id="mybar-3"></div>
+						</div>
+						<div id="tooltip-4" class="row tooltipdiv justify-content-center align-items-center">
+							<h4 class="text-center font2">Meet Us and Learn Everything</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="text-center text-lg-start bg-light text-muted">
+		<!-- Section: Social media -->
+		<section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+			<!-- Left -->
+			<div class="me-5 d-none d-lg-block">
+				<span>Get connected with us on social networks:</span>
+			</div>
+			<!-- Left -->
+
+			<!-- Right -->
+			<div>
+				<a href="https://www.facebook.com/Techno-Hub-101083528873894" target="_blank" class="me-4 text-reset">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+				<a href="https://www.youtube.com/channel/UCZq6HxzLaVid7LycUV5jWZg" target="_blank"
+					class="me-4 text-reset">
+					<i class="fab fa-youtube"></i>
+				</a>
+				<a href="" target="_blank" class="me-4 text-reset">
+					<i class="fab fa-instagram"></i>
+				</a>
+				<a href="https://www.linkedin.com/company/techno-hub-org/" target="_blank" class="me-4 text-reset">
+					<i class="fab fa-linkedin"></i>
+				</a>
+			</div>
+			<!-- Right -->
+		</section>
+		<!-- Section: Social media -->
+
+		<!-- Section: Links  -->
+		<section class="">
+			<div class="container text-center text-md-start mb-3 mt-4">
+				<!-- Grid row -->
+				<div class="row">
+					<!-- Grid column -->
+					<div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-4">
+						<!-- Content -->
+						<h6 class="text-uppercase fw-bold mb-4">
+							<i class="fas fa-gem me-3"></i>Techno-Hub
+						</h6>
+						<p>
+							Techno-Hub is a progressive, Uttarakhand based woman-led start-up.
+						</p>
+					</div>
+					<!--
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Angular</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">React</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Vue</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Laravel</a>
+                        </p>
+                    </div>
+                    
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Settings</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Orders</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    -->
+					<div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-md-0 mb-4">
+						<!-- Links -->
+						<h6 class="text-uppercase fw-bold mb-4">
+							Contact
+						</h6>
+						<p><i class="fas fa-home me-3"></i> C-27 THDC Colony, Near Bengali Kothi Chowk, Dehradun,
+							Uttrakhand</p>
+						<p>
+							<i class="fas fa-envelope me-3"></i>
+							info@techno-hub.org
+						</p>
+						<p><i class="fas fa-phone me-3"></i> +91 9084687772</p>
+						<!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>-->
+					</div>
+					<!-- Grid column -->
+				</div>
+				<!-- Grid row -->
+			</div>
+		</section>
+		<!-- Section: Links  -->
+
+		<!-- Copyright -->
+		<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+			© 2021 Copyright:
+			<a class="text-reset fw-bold" target="_blank" href="https://techno-hub.org/">Techno-Hub</a>
+			All Rights Reserved
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+
+	<script type="text/javascript">
+		const tth1 = document.getElementById("tooltip-1").getBoundingClientRect().top + window.scrollY;
+		const tth2 = document.getElementById("tooltip-2").getBoundingClientRect().top + window.scrollY;
+		const tth3 = document.getElementById("tooltip-3").getBoundingClientRect().top + window.scrollY;
+		const tth4 = document.getElementById("tooltip-4").getBoundingClientRect().top + window.scrollY;
+		var myb1 = document.getElementById("mybar-1").getBoundingClientRect().top + window.scrollY;
+		var myb2 = document.getElementById("mybar-2").getBoundingClientRect().top + window.scrollY;
+		var myb3 = document.getElementById("mybar-3").getBoundingClientRect().top + window.scrollY;
+
+		window.onscroll = function () { myFunction() };
+		function myFunction() {
+			var winInnerHeight = window.innerHeight;
+			console.log(window.pageYOffset);
+			console.log(winInnerHeight);
+			console.log(myb1);
+			console.log((winInnerHeight / 2) + window.pageYOffset);
+			console.log(" ");
+
+			if (myb1 <= (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("mybar-1").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb1) + "px";
+			} else if (myb1 > (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("mybar-1").style.height = 0 + "px";
+			}
+
+			if (myb2 <= (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("mybar-2").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb2) + "px";
+			} else if (myb2 > (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("mybar-2").style.height = 0 + "px";
+			}
+
+			if (myb3 <= (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("mybar-3").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb3) + "px";
+			} else if (myb3 > (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("mybar-3").style.height = 0 + "px";
+			}
+
+			if (tth1 <= (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("tooltip-1").classList.add("changetooltipdiv");
+				document.getElementById("tooltip-1").classList.remove("tooltipdiv");
+			} else if (tth1 > (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("tooltip-1").classList.add("tooltipdiv");
+				document.getElementById("tooltip-1").classList.remove("changetooltipdiv");
+			}
+
+			if (tth2 <= (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("tooltip-2").classList.add("changetooltipdiv");
+				document.getElementById("tooltip-2").classList.remove("tooltipdiv");
+			} else if (tth2 > (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("tooltip-2").classList.add("tooltipdiv");
+				document.getElementById("tooltip-2").classList.remove("changetooltipdiv");
+			}
+
+			if (tth3 <= (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("tooltip-3").classList.add("changetooltipdiv");
+				document.getElementById("tooltip-3").classList.remove("tooltipdiv");
+			} else if (tth3 > (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("tooltip-3").classList.add("tooltipdiv");
+				document.getElementById("tooltip-3").classList.remove("changetooltipdiv");
+			}
+
+			if (tth4 <= (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("tooltip-4").classList.add("changetooltipdiv");
+				document.getElementById("tooltip-4").classList.remove("tooltipdiv");
+			} else if (tth4 > (winInnerHeight / 2) + window.pageYOffset) {
+				document.getElementById("tooltip-4").classList.add("tooltipdiv");
+				document.getElementById("tooltip-4").classList.remove("changetooltipdiv");
+			}
+		}
+
+		function isValid() {
+			var required = $('input').filter('[required]');
+
+			var allRequired = true;
+
+			required.each(function () {
+				if ($(this).val() == '') {
+					allRequired = false;
+				}
+			});
+
+			if (!allRequired) {
+				swal("Attention!", "Please, fill the form first", "warning");
+				return;
+			}
+
+			startPayment();
+		}
+
+		const startPayment = () => {
+			//console.log("paymentStarted")
+
+			$.ajax(
+				{
+					url: "/create-order-starter",
+					data: JSON.stringify({ amount: 250000 }),
+					contentType: 'application/json',
+					type: 'POST',
+					dataType: 'json',
+					success: function (response) {
+						if (response.status == "created") {
+							let options = {
+								"key": "rzp_test_fS3k81U9Notfcz",
+								"amount": "250000",
+								"currency": "INR",
+								"name": "Techno-Hub Pvt. Limited",
+								"description": "Counseling Fee",
+								"image": "https://techno-hub.org/wp-content/uploads/2021/05/cropped-technohub-1.png",
+								"order_id": response.id,
+								"handler": function (response) {
+									swal("Good job!", "Payment successful", "success");
+									$("#form").submit();
+								},
+								"prefill": {
+									"name": "",
+									"email": "",
+									"contact": ""
+								},
+								"notes": {
+									"address": "Techno-Hub Corporate Office"
+								},
+								"theme": {
+									"color": "#3399cc"
+								}
+							}//end of options
+							var rzp = new Razorpay(options);
+							rzp.on('payment.failed', function (response) {
+								swal("Failed!", "Payment failed", "error");
+							});
+							rzp.open();
+						}//end of if
+					},//end of success function
+					error: function (error) {
+						swal("Error!", "Server Error", "error");
+					}
+				}//end of ajax
+			)
+		}//end of start payment
+	</script>
+
+	<script type="text/javascript" th:src="@{/js/homepage.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

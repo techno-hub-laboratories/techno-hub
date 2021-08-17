@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+	<link rel="stylesheet" th:href="@{/css/registration.css}">
+
+	<!-- RazorPay Script -->
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" th:href="@{/images/favicon.png}" />
+	<title>Register</title>
+
+	<style>
+		body {
+			background-color: #dedede;
+			margin: 0px;
+			padding: 0px;
+			scroll-behavior: auto;
+		}
+
+		/* navbar custom css and media query */
+		.navbar-brand {
+			position: absolute;
+		}
+
+		.signoutbtn {
+			position: absolute;
+			right: 3rem;
+		}
+
+		.signinbtn {
+			position: absolute;
+			right: 3rem;
+		}
+
+		@media screen and (max-width: 990px) {
+			.navbar-brand {
+				position: static;
+			}
+
+			.signoutbtn {
+				position: static;
+			}
+
+			.signinbtn {
+				position: static;
+			}
+		}
+
+
+		/* utility functions */
+		.font1 {
+			font-family: 'Noto Sans JP', sans-serif;
+		}
+
+		.font2 {
+			font-family: 'Otomanopee One', sans-serif;
+		}
+
+		.hover {
+			transition: .5s;
+		}
+
+		.hover:hover {
+			transform: scale(1.3);
+		}
+
+		.red-star {
+			color: rgb(253 23 23 / 83%)
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #142f44;">
+		<div class="container-fluid">
+			<a class="mx-3 navbar-brand text-white" href="/">TECHNO-HUB</a>
+			<button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse " id="navbarSupportedContent">
+				<ul class="navbar-nav d-flex align-items-center justify-content-center fs-5" style="width: 100%;">
+					<li class="nav-item mx-2">
+						<a class="nav-link active text-white" aria-current="page" href="/">Home</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-white" href="/services">Services</a>
+					</li>
+					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
+						<form action="#" method="post" th:action="@{/user/profile}">
+							<button type="submit" class="nav-link text-white border-0"
+								style="background-color: transparent;">Profile</button>
+							<input type="text" name="Email" th:value="${#authentication.name}" hidden>
+							<!-- <a class="nav-link text-white"
+								th:href="@{~/profile/(username=${#authentication.name})}">Profile</a> -->
+						</form>
+					</li>
+					<a sec:authorize="isAnonymous()" class="signinbtn my-3" href="/login">
+						<button button type="button" class="btn btn-outline-warning ">
+							<img src="https://img.icons8.com/ios-filled/22/000000/sign-up-in-calendar.png"
+								alt="Sign-in Icon" class="d-inline-block align-text-middle" style="filter: invert(1);">
+							Sign-In
+						</button>
+					</a>
+					<a sec:authorize="isAuthenticated()" class="signoutbtn my-3" href="/logout">
+						<button button type="button" class="btn btn-outline-warning ">
+							<img src="https://img.icons8.com/ios-filled/22/000000/sign-up-in-calendar.png"
+								alt="Sign-in Icon" class="d-inline-block align-text-middle" style="filter: invert(1);">
+							Sign-Out
+						</button>
+					</a>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container my-5">
+		<div id="login">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="card">
+						<header class="card-header">
+							<p href="" class="float-right btn btn-outline-primary mt-1" id="signupDisplayBtn">Sign
+								Up
+							</p>
+							<h4 class="card-title mt-2">Log In</h4>
+						</header>
+						<article class="card-body">
+							<form th:action=@{/login} action="#" method="post">
+								<div th:if="${param.error}" style="color: red">
+									User Id-Password does not matched.
+								</div>
+								<div th:if="${param.logout}" style="color: darkblue">
+									You have been logout.
+								</div>
+								<div class="form-group">
+									<label>E-Mail</label>
+									<input type="email" name="username" class="form-control" placeholder="" required>
+								</div>
+								<div class="form-group">
+									<label>Password</label>
+									<input class="form-control" name="password" type="password" required>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block" value="LOGIN"> Log In
+									</button>
+								</div>
+							</form>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="signup" class="my-4">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="card">
+						<header class="card-header">
+							<p href="" class="float-right btn btn-outline-primary mt-1" id="loginDisplayBtn">Log in
+							</p>
+							<h4 class="card-title mt-2">Sign up</h4>
+						</header>
+						<article class="card-body">
+							<form name="signupForm" id="signupForm" action="/signup" method="POST">
+								<div class="form-row">
+									<div class="col form-group">
+										<label>First name<span class="red-star">*</span> </label>
+										<input type="text" class="form-control" name="firstName" placeholder=""
+											required>
+									</div> <!-- form-group end.// -->
+									<div class="col form-group">
+										<label>Last name<span class="red-star">*</span></label>
+										<input type="text" class="form-control" name="lastName" placeholder=" ">
+									</div> <!-- form-group end.// -->
+								</div> <!-- form-row end.// -->
+								<div class="form-group">
+									<label>Gender<span class="red-star">*</span></label>&nbsp;&nbsp;&nbsp;
+									<div class="form-check form-check-inline">
+										<label class="form-check-label" for="gender">
+											<input class="form-check-input" type="radio" name="gender" checked
+												value="male"></label>
+										Male
+									</div>
+									<div class="form-check form-check-inline">
+										<label class="form-check-label" for="inlineRadio2">
+											<input class="form-check-input" type="radio" name="gender"
+												value="female"></label>
+										Female
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Mobile number<span class="red-star">*</span></label>
+									<input type="mobile" class="form-control" name="mobileNumber" placeholder=""
+										pattern="[0-9]{10}" required>
+									<small class="form-text text-muted">We'll never share your mobile number with anyone
+										else.</small>
+								</div> <!-- form-group end.// -->
+								<div class="form-group">
+									<label>Address<span class="red-star">*</span></label>
+									<input class="form-control" type="text" name="address">
+								</div> <!-- form-group end.// -->
+								<div class="form-group">
+									<label>E-Mail<span class="red-star">*</span></label>
+									<input type="email" class="form-control" id="email" name="email" placeholder=""
+										required onchange="checkemail()">
+									<small class="form-text text-muted">We'll never share your E-mail with anyone
+										else.</small>
+								</div> <!-- form-group end.// -->
+								<div class="form-group">
+									<label>Create Password<span class="red-star">*</span></label>
+									<input class="form-control" type="password" name="password" required>
+								</div> <!-- form-group end.// -->
+								<div class="form-group">
+									<label for="description">Description</label>
+									<textarea class="form-control" name="description" rows="3" required
+										placeholder="Briefly describe about the service you need"></textarea>
+								</div>
+								<div class="form-group">
+									<button id="paybtn" type="button" class="btn btn-primary col-12" onclick="isValid()"
+										disabled="disabled">Pay &#8377;
+										500</button>
+								</div> <!-- form-group// -->
+								<small class="text-muted">By clicking the 'Pay' button, you confirm that you
+									accept our Terms of use and Privacy Policy.</small>
+							</form>
+						</article> <!-- card-body end .// -->
+					</div> <!-- card.// -->
+				</div> <!-- col.//-->
+			</div> <!-- row.//-->
+		</div> <!-- signup end-->
+	</div>
+	<!--container end.//-->
+
+	<!-- Footer -->
+	<footer class="text-center text-lg-start bg-light text-muted">
+		<!-- Section: Social media -->
+		<section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+			<!-- Left -->
+			<div class="me-5 d-none d-lg-block">
+				<span>Get connected with us on social networks:</span>
+			</div>
+			<!-- Left -->
+
+			<!-- Right -->
+			<div>
+				<a href="https://www.facebook.com/Techno-Hub-101083528873894" target="_blank" class="me-4 text-reset">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+				<a href="https://www.youtube.com/channel/UCZq6HxzLaVid7LycUV5jWZg" target="_blank"
+					class="me-4 text-reset">
+					<i class="fab fa-youtube"></i>
+				</a>
+				<a href="" target="_blank" class="me-4 text-reset">
+					<i class="fab fa-instagram"></i>
+				</a>
+				<a href="https://www.linkedin.com/company/techno-hub-org/" target="_blank" class="me-4 text-reset">
+					<i class="fab fa-linkedin"></i>
+				</a>
+			</div>
+			<!-- Right -->
+		</section>
+		<!-- Section: Social media -->
+
+		<!-- Section: Links  -->
+		<section class="">
+			<div class="container text-center text-md-start mb-3 mt-4">
+				<!-- Grid row -->
+				<div class="row">
+					<!-- Grid column -->
+					<div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-4">
+						<!-- Content -->
+						<h6 class="text-uppercase fw-bold mb-4">
+							<i class="fas fa-gem me-3"></i>Techno-Hub
+						</h6>
+						<p>
+							Techno-Hub is a progressive, Uttarakhand based woman-led start-up.
+						</p>
+					</div>
+					<!--
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Angular</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">React</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Vue</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Laravel</a>
+                        </p>
+                    </div>
+                    
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Settings</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Orders</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    -->
+					<div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-md-0 mb-4">
+						<!-- Links -->
+						<h6 class="text-uppercase fw-bold mb-4">
+							Contact
+						</h6>
+						<p><i class="fas fa-home me-3"></i> C-27 THDC Colony, Near Bengali Kothi Chowk, Dehradun,
+							Uttrakhand</p>
+						<p>
+							<i class="fas fa-envelope me-3"></i>
+							info@techno-hub.org
+						</p>
+						<p><i class="fas fa-phone me-3"></i> +91 9084687772</p>
+						<!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>-->
+					</div>
+					<!-- Grid column -->
+				</div>
+				<!-- Grid row -->
+			</div>
+		</section>
+		<!-- Section: Links  -->
+
+		<!-- Copyright -->
+		<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+			© 2021 Copyright:
+			<a class="text-reset fw-bold" target="_blank" href="https://techno-hub.org/">Techno-Hub</a>
+			All Rights Reserved
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+
+	<script>
+		function checkemail() {
+			let Email = document.getElementById("email");
+			let PayBtn = document.getElementById("paybtn");
+
+			fetch("http://157.245.204.170:8080/authenticate-email", {
+
+				// Adding method type
+				method: "POST",
+
+				// Adding body or contents to send
+				body: JSON.stringify({
+					title: "foo",
+					body: "bar",
+					email: Email.value
+				}),
+
+				// Adding headers to the request
+				headers: {
+					"Content-type": "application/json; charset=UTF-8"
+				}
+			})
+
+				// Converting to JSON
+				.then(response => response.json())
+				.then(json => {
+					console.log(json)
+					if (json) {
+						PayBtn.removeAttribute("disabled");
+					}
+					else {
+						PayBtn.setAttribute('disabled', 'disabled');
+					}
+				});
+		}
+		function isValid() {
+			//var required = $('input').filter('[required]');
+			var required = $("form[name='signupForm'] input").filter('[required]');
+
+			var allRequired = true;
+
+			required.each(function () {
+				if ($(this).val() == '') {
+					allRequired = false;
+				}
+			});
+
+			if (!allRequired) {
+				Swal.fire("Attention!", "Please, fill the form first", "warning");
+				return;
+			}
+
+			startPayment();
+		}
+
+		const startPayment = () => {
+			//console.log("paymentStarted")
+
+			$.ajax({
+				url: "/create-order-sign-in",
+				data: JSON.stringify({ amount: 50000 }),
+				contentType: 'application/json',
+				type: 'POST',
+				dataType: 'json',
+				success: function (response) {
+					if (response.status == "created") {
+						let options = {
+							"key": "rzp_test_fS3k81U9Notfcz",
+							"amount": "50000",
+							"currency": "INR",
+							"name": "Techno-Hub Laboratories",
+							"description": "Registration Fee",
+							"image": "https://techno-hub.org/wp-content/uploads/2021/05/cropped-technohub-1.png",
+							"order_id": response.id,
+							"handler": function (response) {
+								Swal.fire({
+									title: 'Payment Successful!',
+									text: "We'll contact you shortly",
+									icon: 'success',
+									confirmButtonText: 'Ok',
+									allowOutsideClick: false,
+									allowEscapeKey: false
+								}).then((result) => {
+									if (result.isConfirmed) {
+										$("#signupForm").submit();
+									} else if (result.dismiss === Swal.DismissReason.cancel) {
+										Swal.fire(
+											'Oops!!',
+											'Some error occured. Try Again',
+											'error'
+										)
+									}
+								})
+							},
+							"notes": {
+								"address": "Techno-Hub Corporate Office"
+							},
+							"theme": {
+								"color": "#3399cc"
+							}
+						}//end of options
+						var rzp = new Razorpay(options);
+						rzp.on('payment.failed', function (response) {
+							Swal.fire("Failed!", "Payment failed", "error");
+						});
+						rzp.open();
+					}//end of if
+				},//end of success function
+				error: function (error) {
+					swal("Error!", "Server Error", "error");
+				}
+			}//end of ajax
+			)
+		}//end of start payment
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="/static/js/registration.js" th:src="@{/js/registration.js}"></script>
+</body>
+
+</html>

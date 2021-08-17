@@ -1,0 +1,58 @@
+body,
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* navbar custom css and media query */
+.navbar-brand {
+  position: absolute;
+}
+
+.profilebtn {
+  position: absolute;
+  right: 3rem;
+}
+
+@media screen and (max-width: 990px) {
+  .navbar-brand {
+    position: static;
+  }
+  .profilebtn {
+    position: static;
+  }
+}
+
+/* contact section */
+
+#Contact {
+  background-color: #a21e21;
+}
+
+/* utility classes */
+
+#carouselExampleDark {
+  z-index: -1;
+}
+
+h1 {
+  color: #111;
+  font-family: "Helvetica Neue", sans-serif;
+  /* font-size: 200px; */
+  font-weight: bold;
+  letter-spacing: -1px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  color: #111;
+  font-family: "Calibri", sans-serif;
+  /* font-size: 25px; */
+  line-height: 1.5;
+}
+
+hr {
+  background-color: #000;
+}

@@ -1,0 +1,54 @@
+#signup{
+    display: none;
+}
+
+.profilebtn {
+  position: absolute;
+  right: 3rem;
+}
+body,
+* {
+  /* min-width: 800px; */
+  /* background: #; */
+  /* fallback for old browsers */
+  /* background: -webkit-linear-gradient(to right, #333399, #ff00cc); */
+  /* Chrome 10-25, Safari 5.1-6 */
+  /* background: linear-gradient(to right, #333399, #ff00cc); */
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  margin: 0px;
+  padding: 0px;
+}
+
+/* navbar custom css and media query */
+.navbar-brand {
+  position: absolute;
+}
+
+.profilebtn {
+  position: absolute;
+  right: 3rem;
+}
+
+@media screen and (max-width: 990px) {
+  .navbar-brand {
+    position: static;
+  }
+  .profilebtn {
+    position: static;
+  }
+}
+
+/* contact section */
+
+#Contact {
+  background-color: #a21e21;
+}
+
+/* utility classes */
+
+#carouselExampleDark {
+  z-index: -1;
+}
+
+
