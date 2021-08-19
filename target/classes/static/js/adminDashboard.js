@@ -167,7 +167,7 @@ function getdata() {
             cat = "guidance";
 
 
-    fetch("http://157.245.204.170:8080/get-data", {
+    fetch("https://technomentorship.org/get-data", {
 
         // Adding method type
         method: "POST",
