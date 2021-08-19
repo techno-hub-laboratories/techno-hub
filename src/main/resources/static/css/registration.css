@@ -55,3 +55,7 @@ body {
 .red-star {
 	color: rgb(253 23 23 / 83%)
 }
+
+#signup {
+	display : none;
+}
