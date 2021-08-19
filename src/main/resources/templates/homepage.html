@@ -32,9 +32,6 @@
 		rel="stylesheet">
 
 	<title>Home</title>
-	<style>
-		
-	</style>
 </head>
 
 <body>
@@ -170,8 +167,8 @@
 					class="me-4 text-reset">
 					<i class="fab fa-youtube"></i>
 				</a>
-				<a href="" target="_blank" class="me-4 text-reset">
-					<i class="fab fa-instagram"></i>
+				<a href="https://www.instagram.com/technohublaboratories/" target="_blank" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
 				</a>
 				<a href="https://www.linkedin.com/company/techno-hub-org/" target="_blank" class="me-4 text-reset">
 					<i class="fab fa-linkedin"></i>
@@ -265,146 +262,8 @@
 	</footer>
 	<!-- Footer -->
 
-	<script type="text/javascript">
-		const tth1 = document.getElementById("tooltip-1").getBoundingClientRect().top + window.scrollY;
-		const tth2 = document.getElementById("tooltip-2").getBoundingClientRect().top + window.scrollY;
-		const tth3 = document.getElementById("tooltip-3").getBoundingClientRect().top + window.scrollY;
-		const tth4 = document.getElementById("tooltip-4").getBoundingClientRect().top + window.scrollY;
-		var myb1 = document.getElementById("mybar-1").getBoundingClientRect().top + window.scrollY;
-		var myb2 = document.getElementById("mybar-2").getBoundingClientRect().top + window.scrollY;
-		var myb3 = document.getElementById("mybar-3").getBoundingClientRect().top + window.scrollY;
-
-		window.onscroll = function () { myFunction() };
-		function myFunction() {
-			var winInnerHeight = window.innerHeight;
-			console.log(window.pageYOffset);
-			console.log(winInnerHeight);
-			console.log(myb1);
-			console.log((winInnerHeight / 2) + window.pageYOffset);
-			console.log(" ");
-
-			if (myb1 <= (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("mybar-1").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb1) + "px";
-			} else if (myb1 > (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("mybar-1").style.height = 0 + "px";
-			}
-
-			if (myb2 <= (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("mybar-2").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb2) + "px";
-			} else if (myb2 > (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("mybar-2").style.height = 0 + "px";
-			}
-
-			if (myb3 <= (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("mybar-3").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb3) + "px";
-			} else if (myb3 > (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("mybar-3").style.height = 0 + "px";
-			}
-
-			if (tth1 <= (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("tooltip-1").classList.add("changetooltipdiv");
-				document.getElementById("tooltip-1").classList.remove("tooltipdiv");
-			} else if (tth1 > (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("tooltip-1").classList.add("tooltipdiv");
-				document.getElementById("tooltip-1").classList.remove("changetooltipdiv");
-			}
-
-			if (tth2 <= (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("tooltip-2").classList.add("changetooltipdiv");
-				document.getElementById("tooltip-2").classList.remove("tooltipdiv");
-			} else if (tth2 > (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("tooltip-2").classList.add("tooltipdiv");
-				document.getElementById("tooltip-2").classList.remove("changetooltipdiv");
-			}
-
-			if (tth3 <= (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("tooltip-3").classList.add("changetooltipdiv");
-				document.getElementById("tooltip-3").classList.remove("tooltipdiv");
-			} else if (tth3 > (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("tooltip-3").classList.add("tooltipdiv");
-				document.getElementById("tooltip-3").classList.remove("changetooltipdiv");
-			}
-
-			if (tth4 <= (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("tooltip-4").classList.add("changetooltipdiv");
-				document.getElementById("tooltip-4").classList.remove("tooltipdiv");
-			} else if (tth4 > (winInnerHeight / 2) + window.pageYOffset) {
-				document.getElementById("tooltip-4").classList.add("tooltipdiv");
-				document.getElementById("tooltip-4").classList.remove("changetooltipdiv");
-			}
-		}
-
-		function isValid() {
-			var required = $('input').filter('[required]');
-
-			var allRequired = true;
-
-			required.each(function () {
-				if ($(this).val() == '') {
-					allRequired = false;
-				}
-			});
-
-			if (!allRequired) {
-				swal("Attention!", "Please, fill the form first", "warning");
-				return;
-			}
-
-			startPayment();
-		}
-
-		const startPayment = () => {
-			//console.log("paymentStarted")
-
-			$.ajax(
-				{
-					url: "/create-order-starter",
-					data: JSON.stringify({ amount: 250000 }),
-					contentType: 'application/json',
-					type: 'POST',
-					dataType: 'json',
-					success: function (response) {
-						if (response.status == "created") {
-							let options = {
-								"key": "rzp_test_fS3k81U9Notfcz",
-								"amount": "250000",
-								"currency": "INR",
-								"name": "Techno-Hub Pvt. Limited",
-								"description": "Counseling Fee",
-								"image": "https://techno-hub.org/wp-content/uploads/2021/05/cropped-technohub-1.png",
-								"order_id": response.id,
-								"handler": function (response) {
-									swal("Good job!", "Payment successful", "success");
-									$("#form").submit();
-								},
-								"prefill": {
-									"name": "",
-									"email": "",
-									"contact": ""
-								},
-								"notes": {
-									"address": "Techno-Hub Corporate Office"
-								},
-								"theme": {
-									"color": "#3399cc"
-								}
-							}//end of options
-							var rzp = new Razorpay(options);
-							rzp.on('payment.failed', function (response) {
-								swal("Failed!", "Payment failed", "error");
-							});
-							rzp.open();
-						}//end of if
-					},//end of success function
-					error: function (error) {
-						swal("Error!", "Server Error", "error");
-					}
-				}//end of ajax
-			)
-		}//end of start payment
-	</script>
-
 	<script type="text/javascript" th:src="@{/js/homepage.js}"></script>
+	
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
 		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
 		crossorigin="anonymous"></script>
