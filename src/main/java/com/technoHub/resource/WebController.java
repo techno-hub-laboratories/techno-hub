@@ -193,7 +193,7 @@ public class WebController {
 
 		request = requestService.addRequest(request);
 
-		User user = UserRepository.findById(data.get("email")).get();
+//		User user = UserRepository.findById(data.get("email")).get();
 
 		return "redirect:/";
 	}
