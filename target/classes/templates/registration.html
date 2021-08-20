@@ -83,10 +83,26 @@
 						<article class="card-body">
 							<form th:action=@{/login} action="#" method="post">
 								<div th:if="${param.error}" style="color: red">
-									User Id-Password does not matched.
+									<script th:inline="javascript">
+									    /*<![CDATA[*/
+									    Swal.fire(
+										'',
+										'Invalid Credentials',
+										'error'
+										)
+									    /*]]>*/
+									</script>
 								</div>
 								<div th:if="${param.logout}" style="color: darkblue">
-									You have been logout.
+									<script th:inline="javascript">
+									    /*<![CDATA[*/
+									    Swal.fire(
+										'',
+										'You have been logged out',
+										'success'
+										)
+									    /*]]>*/
+									</script>
 								</div>
 								<div class="form-group">
 									<label>E-Mail</label>
