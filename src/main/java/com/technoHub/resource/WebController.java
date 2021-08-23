@@ -205,18 +205,7 @@ public class WebController {
 		System.out.println(temp);
 		return temp;
 	}
-
 }
-//{
-//	"email" : "amit@gmail.com",
-//	"firstName" : "amit",
-//	"lastName" : "negi", 
-//	"gender" : "male", 
-//	"highestQualification" : "Bachelor",
-//	"mobileNumber" : 1111111111,
-//	"address" : "rishikesh",
-//	"password" : "amit"
-//}
 
 //payment button
 
