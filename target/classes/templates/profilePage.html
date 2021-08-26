@@ -47,9 +47,9 @@
                     <li class="nav-item mx-2">
                         <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
                     </li>
-                    <li sec:authorize="isAuthenticated()" class="nav-item mx-2">
+                    <!-- <li sec:authorize="isAuthenticated()" class="nav-item mx-2">
                         <a class="nav-link text-white" href="/services">Services</a>
-                    </li>
+                    </li> -->
                     <li sec:authorize="isAuthenticated()" class="nav-item mx-2">
                         <form action="#" method="post" th:action="@{/user/profile}">
                             <button type="submit" class="nav-link text-white border-0"

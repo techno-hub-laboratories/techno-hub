@@ -91,7 +91,7 @@ const startPayment = () => {
 					"handler": function (response) {
 						Swal.fire({
 							title: 'Payment Successful!',
-							text: "We'll contact you shortly",
+							text: "Check your E-Mail and we'll contact you shortly",
 							icon: 'success',
 							confirmButtonText: 'Ok',
 							allowOutsideClick: false,

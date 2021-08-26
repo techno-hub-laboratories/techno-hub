@@ -56,9 +56,9 @@
 					<li class="nav-item mx-2">
 						<a class="nav-link active text-white" aria-current="page" href="/">Home</a>
 					</li>
-					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
-						<a class="nav-link text-white" href="/services">Services</a>
-					</li>
+					<!-- <li sec:authorize="isAuthenticated()" class="nav-item mx-2">
+						<a class="nav-link text-white" href="/services">Services</a> 
+					</li> -->
 					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
 						<form action="#" method="post" th:action="@{/user/profile}">
 							<button type="submit" class="nav-link text-white border-0"
@@ -120,9 +120,12 @@
 					<!-- <p class="lh-lg mt-3">We'll contact you shortly.</p> -->
 				</div>
 				
-				<div sec:authorize="isAuthenticated()" class="p-0 mx-auto"
-						style="width: fit-content;">
-						Congratulations on registering.</div>
+				<div sec:authorize="isAuthenticated()">
+					<div class="p-0 mx-auto" style="width: fit-content;">
+						<h4 class="py-2">Congratulations on Registering </h4>
+						Our Team will contact you shortly. 
+					</div>
+				</div>
 			</div>
 			<div class="col-md-5 order-1 order-md-2">
 				<div class="container row">

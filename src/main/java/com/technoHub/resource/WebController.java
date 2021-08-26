@@ -29,7 +29,7 @@ import com.technoHub.service.RequestServices;
 import com.technoHub.service.UserServices;
 
 @Controller
-@CrossOrigin(origins = "https://technomentorship.org")
+@CrossOrigin(origins = { "*", "https://technomentorship.org" })
 public class WebController {
 
 	@Autowired
@@ -67,10 +67,10 @@ public class WebController {
 		return "counselingForm";
 	}
 
-	@GetMapping("/dashboard")
-	public String admin() {
-		return "adminDashboard";
-	}
+//	@GetMapping("/dashboard")
+//	public String admin() {
+//		return "adminDashboard";
+//	}
 
 	@GetMapping("/positive")
 	public String positive() {
@@ -139,7 +139,7 @@ public class WebController {
 				+ user.getEmail() + "\n" + "Mobile Number : " + user.getMobileNumber() + "\n" + user.getDescription();
 
 		String msgForClient = "Hello " + user.getFirstName()
-				+ ",\n \t Congratulations on Registering. Now, We will contact you at the earliest. After that if you want you can opt for our services.\n\n Warm Regards\nTechno-Hub Team";
+				+ ",\n \t Congratulations on Registering. Now, We will contact you at the earliest.\n\n Warm Regards\nTechno-Hub Team";
 
 //		service.simplemail("negikingston@gmail.com", msgForAdmin, "Counseling Request");
 //		service.simplemail(user.getEmail(), msgForClient, "Registration Successful");
