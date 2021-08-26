@@ -29,7 +29,7 @@ import com.technoHub.service.RequestServices;
 import com.technoHub.service.UserServices;
 
 @Controller
-@CrossOrigin(origins = "https://technomentorship.org" )
+@CrossOrigin(origins = "https://technomentorship.org")
 public class WebController {
 
 	@Autowired
@@ -72,6 +72,11 @@ public class WebController {
 		return "adminDashboard";
 	}
 
+	@GetMapping("/positive")
+	public String positive() {
+		return "positive";
+	}
+
 	// getmapping for the profile
 	@GetMapping("/user/profile")
 	public String profile(@ModelAttribute("Email") String username, Model model) {
@@ -86,10 +91,10 @@ public class WebController {
 		model.addAttribute("gender", user.getGender());
 		return "profilePage";
 	}
-	
+
 	@PostMapping("/user/profile")
-	public String Profile(@RequestParam Map<String,String> data, Model model) {
-		System.out.println("hello "+data.get("Email"));
+	public String Profile(@RequestParam Map<String, String> data, Model model) {
+		System.out.println("hello " + data.get("Email"));
 		User user = UserRepository.findById(data.get("Email")).get();
 		System.out.println(user);
 		model.addAttribute("fullname", user.getFirstName() + " " + user.getLastName());
@@ -122,7 +127,7 @@ public class WebController {
 	@PostMapping("/signup")
 	public String signUp(@RequestParam Map<String, String> data) {
 		User user = new User(data.get("firstName"), data.get("lastName"), data.get("mobileNumber"), data.get("address"),
-				data.get("email"), data.get("password"), data.get("gender"));
+				data.get("email"), data.get("password"), data.get("gender"), data.get("description"));
 
 //		Request request = new Request(user.getEmail(), "", "", data.get("description"));
 
@@ -131,10 +136,10 @@ public class WebController {
 //		user.getRequests().add(request);
 
 		String msgForAdmin = "Name : " + user.getFirstName() + " " + user.getLastName() + "\n" + "E-Mail : "
-				+ user.getEmail() + "\n" + "Mobile Number : " + user.getMobileNumber() + "\n";
+				+ user.getEmail() + "\n" + "Mobile Number : " + user.getMobileNumber() + "\n" + user.getDescription();
 
 		String msgForClient = "Hello " + user.getFirstName()
-				+ ",\n \t Congratulations on Registering. We will contact you at the earliest.\n\n Warm Regards\nTechno-Hub Team";
+				+ ",\n \t Congratulations on Registering. Now, We will contact you at the earliest. After that if you want you can opt for our services.\n\n Warm Regards\nTechno-Hub Team";
 
 //		service.simplemail("negikingston@gmail.com", msgForAdmin, "Counseling Request");
 //		service.simplemail(user.getEmail(), msgForClient, "Registration Successful");
@@ -187,9 +192,7 @@ public class WebController {
 	public String saveRequest(@RequestParam Map<String, String> data) {
 		System.out.println(data);
 		Request request = new Request(data.get("email"), data.get("mobileNumber"), data.get("firstName"),
-				data.get("lastName"),
-				data.get("category"), data.getOrDefault("subject", ""),
-				data.get("description"));
+				data.get("lastName"), data.get("category"), data.getOrDefault("subject", ""), data.get("description"));
 
 		request = requestService.addRequest(request);
 

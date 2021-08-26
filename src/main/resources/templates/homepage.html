@@ -56,7 +56,7 @@
 					<li class="nav-item mx-2">
 						<a class="nav-link active text-white" aria-current="page" href="/">Home</a>
 					</li>
-					<li class="nav-item mx-2">
+					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
 						<a class="nav-link text-white" href="/services">Services</a>
 					</li>
 					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
@@ -112,16 +112,17 @@
 					<p class="my-5 lh-lg text-center mb-4">Igniting curiosity, developing research-oriented mindset for
 						continuous learning and helping millions achieve their goals through mentoring support</p>
 				</div>
-				<div class="mx-auto p-2 d-flex flex-column justify-content-center align-items-center registerbox">
+				<div sec:authorize="isAnonymous()" class="mx-auto p-2 d-flex flex-column justify-content-center align-items-center registerbox">
 					<p class="fs-1 font2">Ready to start?</p>
-					<a sec:authorize="isAnonymous()" href="/login" class="p-0 mx-auto"
+					<a href="/login" class="p-0 mx-auto"
 						style="width: fit-content;"><button type="button" class="btn my-3 px-4 fw-bold text-white hover"
 							style="background-color: #0EDC8D;">REGISTER</button></a>
-					<a sec:authorize="isAuthenticated()" href="/user/counseling-form" class="p-0 mx-auto"
-						style="width: fit-content;"><button type="button" class="btn my-3 px-4 fw-bold text-white hover"
-							style="background-color: #0EDC8D;">Let's Go</button></a>
 					<!-- <p class="lh-lg mt-3">We'll contact you shortly.</p> -->
 				</div>
+				
+				<div sec:authorize="isAuthenticated()" class="p-0 mx-auto"
+						style="width: fit-content;">
+						Congratulations on registering.</div>
 			</div>
 			<div class="col-md-5 order-1 order-md-2">
 				<div class="container row">
@@ -136,19 +137,19 @@
 							<div id="mybar-1"></div>
 						</div>
 						<div id="tooltip-2" class="row tooltipdiv justify-content-center align-items-center">
-							<h4 class="text-center font2">Choose Service</h4>
+							<h4 class="text-center font2">Talk with Mentor</h4>
 						</div>
 						<div class="progressbar">
 							<div id="mybar-2"></div>
 						</div>
 						<div id="tooltip-3" class="row tooltipdiv justify-content-center align-items-center">
-							<h4 class="text-center font2">Pay the Fees</h4>
+							<h4 class="text-center font2">Choose Service</h4>
 						</div>
 						<div class="progressbar">
 							<div id="mybar-3"></div>
 						</div>
 						<div id="tooltip-4" class="row tooltipdiv justify-content-center align-items-center">
-							<h4 class="text-center font2">Meet Us and Learn Everything</h4>
+							<h4 class="text-center font2">Meet Us and Learn</h4>
 						</div>
 					</div>
 				</div>

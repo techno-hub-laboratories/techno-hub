@@ -21,13 +21,14 @@ public class User {
 	private String gender;
 	private String address;
 	private String password;
+	private String description;
 	private String Role = "ROLE_USER";
 
 	public User() {
 	}
 
 	public User(String firstName, String lastName, String mobileNumber, String address, String email, String password,
-			String gender) {
+			String gender, String description) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,5 +37,6 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.gender = gender;
+		this.description = description;
 	}
 }

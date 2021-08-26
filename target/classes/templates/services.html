@@ -2,14 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-	<noscript>
-		This page needs JavaScript activated to work.
-		<style>
-			div {
-				display: none;
-			}
-		</style>
-	</noscript>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,7 +49,7 @@
 					<li class="nav-item mx-2">
 						<a class="nav-link active text-white" aria-current="page" href="/">Home</a>
 					</li>
-					<li class="nav-item mx-2">
+					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
 						<a class="nav-link text-white" href="/services">Services</a>
 					</li>
 					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
@@ -110,36 +102,44 @@
             </div> -->
             <div class="col-sm-12">
                 <div class="card mb-3 border-0 " style="background-color: transparent;">
-                    <div class="row gx-5 justify-content-evenly">
-                        <div class="col-md-5 order-2 order-md-1">
-                            <div class="card-body">
-                                <h3 class="card-title text-center fw-bolder">Mentorship</h3>
-                                <p class="card-text lh-lg">A mentor is someone who allows you to see the HOPE inside
-                                    yourself.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-5 order-1 order-md-2">
-                            <img th:src="@{/images/mentoring.jpg}" class="img-fluid card-img-top images rounded hover"
-                                alt="...">
-                        </div>
-                    </div>
+                    
+						<div class="row gx-5 justify-content-evenly">
+	                        <div class="col-md-5 order-2 order-md-1">
+	                            <div class="card-body">
+	                            <a th:href="@{/user/counseling-form}">
+	                                <h3 class="card-title text-center fw-bolder">Mentorship</h3>
+	                                </a>
+	                                <p class="card-text lh-lg">A mentor is someone who allows you to see the HOPE inside
+	                                    yourself.</p>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-5 order-1 order-md-2">
+	                            <img th:src="@{/images/mentoring.jpg}" class="img-fluid card-img-top images rounded hover"
+	                                alt="...">
+	                        </div>
+	                    </div>
+	                    
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="card mb-3 border-0 " style="background-color: transparent;">
-                    <div class="row gx-5 justify-content-evenly">
-                        <div class="col-md-5">
-                            <img th:src="@{/images/guidance.jpg}" class="img-fluid images rounded hover" alt="...">
-                        </div>
-                        <div class="col-md-5">
-                            <div class="card-body">
-                                <h3 class="card-title text-center fw-bolder">Guidance</h3>
-                                <p class="card-text lh-lg">True guidance is like a small torch in a dark forest. It
-                                    doesn't show EVERYTHING at once, But gives enough light for the NEXT step to be
-                                    safe.</p>
-                            </div>
-                        </div>
-                    </div>
+	                
+	                    <div class="row gx-5 justify-content-evenly">
+	                        <div class="col-md-5">
+	                            <img th:src="@{/images/guidance.jpg}" class="img-fluid images rounded hover" alt="...">
+	                        </div>
+	                        <div class="col-md-5">
+	                            <div class="card-body">
+	                            <a th:href="@{/user/counseling-form}">
+	                                <h3 class="card-title text-center fw-bolder">Project Guidance</h3>
+	                                </a>
+	                                <p class="card-text lh-lg">True guidance is like a small torch in a dark forest. It
+	                                    doesn't show EVERYTHING at once, But gives enough light for the NEXT step to be
+	                                    safe.</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                
                 </div>
             </div>
             <!-- <div class="col-sm-12">

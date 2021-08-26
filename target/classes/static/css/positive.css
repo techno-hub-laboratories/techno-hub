@@ -1,0 +1,81 @@
+body {
+    background-color: #dedede;
+    margin: 0px;
+    padding: 0px;
+    scroll-behavior: auto;
+}
+
+/* navbar custom css and media query */
+.navbar-brand {
+    position: absolute;
+}
+
+.signoutbtn {
+    position: absolute;
+    right: 3rem;
+}
+
+.signinbtn {
+    position: absolute;
+    right: 3rem;
+}
+
+@media screen and (max-width: 990px) {
+    .navbar-brand {
+        position: static;
+    }
+
+    .signoutbtn {
+        position: static;
+    }
+
+    .signinbtn {
+        position: static;
+    }
+}
+
+@media screen and (max-width: 641px) {
+	#quoteBox {
+		flex-wrap: wrap !important;
+	}
+	
+	.card-text {
+		font-weight:normal !important;
+		font-size: 1rem;
+	}
+	
+	#thought1, #thought2 {
+		font-size: .7rem
+	}
+}
+
+
+/* utility functions */
+.font1 {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.font2 {
+    font-family: 'Otomanopee One', sans-serif;
+}
+
+.hover {
+    transition: .5s;
+}
+
+.hover:hover {
+    transform: scale(1.05);
+}
+
+.images {
+    box-shadow: 0px 0px 60px 0px rgb(0 0 0 / 50%);
+    background-color: transparent;
+}
+
+#thought1::after {
+	content: "- Albert Einstein";
+}
+
+#thought2::after {
+	content: "- Vamsi Krish";
+}
