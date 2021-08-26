@@ -29,7 +29,7 @@ import com.technoHub.service.RequestServices;
 import com.technoHub.service.UserServices;
 
 @Controller
-@CrossOrigin(origins = { "*", "https://technomentorship.org" })
+@CrossOrigin(origins = "https://technomentorship.org")
 public class WebController {
 
 	@Autowired
