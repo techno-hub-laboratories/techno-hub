@@ -208,6 +208,11 @@ public class WebController {
 		System.out.println(temp);
 		return temp;
 	}
+
+	@GetMapping("/tnc")
+	public String termsAndConditions() {
+		return "termsAndConditions";
+	}
 }
 
 //payment button

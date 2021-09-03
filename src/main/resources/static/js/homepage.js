@@ -70,11 +70,11 @@ $("#PhoneNumber").change(() => {
 
 const tth1 = document.getElementById("tooltip-1").getBoundingClientRect().top + window.scrollY;
 const tth2 = document.getElementById("tooltip-2").getBoundingClientRect().top + window.scrollY;
-const tth3 = document.getElementById("tooltip-3").getBoundingClientRect().top + window.scrollY;
-const tth4 = document.getElementById("tooltip-4").getBoundingClientRect().top + window.scrollY;
+//const tth3 = document.getElementById("tooltip-3").getBoundingClientRect().top + window.scrollY;
+//const tth4 = document.getElementById("tooltip-4").getBoundingClientRect().top + window.scrollY;
 var myb1 = document.getElementById("mybar-1").getBoundingClientRect().top + window.scrollY;
-var myb2 = document.getElementById("mybar-2").getBoundingClientRect().top + window.scrollY;
-var myb3 = document.getElementById("mybar-3").getBoundingClientRect().top + window.scrollY;
+//var myb2 = document.getElementById("mybar-2").getBoundingClientRect().top + window.scrollY;
+//var myb3 = document.getElementById("mybar-3").getBoundingClientRect().top + window.scrollY;
 
 window.onscroll = function () { myFunction() };
 function myFunction() {
@@ -91,17 +91,17 @@ function myFunction() {
 		document.getElementById("mybar-1").style.height = 0 + "px";
 	}
 
-	if (myb2 <= (winInnerHeight / 2) + window.pageYOffset) {
-		document.getElementById("mybar-2").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb2) + "px";
-	} else if (myb2 > (winInnerHeight / 2) + window.pageYOffset) {
-		document.getElementById("mybar-2").style.height = 0 + "px";
-	}
+	//if (myb2 <= (winInnerHeight / 2) + window.pageYOffset) {
+	//	document.getElementById("mybar-2").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb2) + "px";
+	//} else if (myb2 > (winInnerHeight / 2) + window.pageYOffset) {
+	//	document.getElementById("mybar-2").style.height = 0 + "px";
+	//}
 
-	if (myb3 <= (winInnerHeight / 2) + window.pageYOffset) {
-		document.getElementById("mybar-3").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb3) + "px";
-	} else if (myb3 > (winInnerHeight / 2) + window.pageYOffset) {
-		document.getElementById("mybar-3").style.height = 0 + "px";
-	}
+	//if (myb3 <= (winInnerHeight / 2) + window.pageYOffset) {
+	//	document.getElementById("mybar-3").style.height = ((winInnerHeight / 2) + window.pageYOffset - myb3) + "px";
+	//} else if (myb3 > (winInnerHeight / 2) + window.pageYOffset) {
+	//	document.getElementById("mybar-3").style.height = 0 + "px";
+	//}
 
 	if (tth1 <= (winInnerHeight / 2) + window.pageYOffset) {
 		document.getElementById("tooltip-1").classList.add("changetooltipdiv");
@@ -119,19 +119,19 @@ function myFunction() {
 		document.getElementById("tooltip-2").classList.remove("changetooltipdiv");
 	}
 
-	if (tth3 <= (winInnerHeight / 2) + window.pageYOffset) {
-		document.getElementById("tooltip-3").classList.add("changetooltipdiv");
-		document.getElementById("tooltip-3").classList.remove("tooltipdiv");
-	} else if (tth3 > (winInnerHeight / 2) + window.pageYOffset) {
-		document.getElementById("tooltip-3").classList.add("tooltipdiv");
-		document.getElementById("tooltip-3").classList.remove("changetooltipdiv");
-	}
+	//if (tth3 <= (winInnerHeight / 2) + window.pageYOffset) {
+	//	document.getElementById("tooltip-3").classList.add("changetooltipdiv");
+	//	document.getElementById("tooltip-3").classList.remove("tooltipdiv");
+	//} else if (tth3 > (winInnerHeight / 2) + window.pageYOffset) {
+	//	document.getElementById("tooltip-3").classList.add("tooltipdiv");
+	//	document.getElementById("tooltip-3").classList.remove("changetooltipdiv");
+	//}
 
-	if (tth4 <= (winInnerHeight / 2) + window.pageYOffset) {
-		document.getElementById("tooltip-4").classList.add("changetooltipdiv");
-		document.getElementById("tooltip-4").classList.remove("tooltipdiv");
-	} else if (tth4 > (winInnerHeight / 2) + window.pageYOffset) {
-		document.getElementById("tooltip-4").classList.add("tooltipdiv");
-		document.getElementById("tooltip-4").classList.remove("changetooltipdiv");
-	}
+	//if (tth4 <= (winInnerHeight / 2) + window.pageYOffset) {
+	//	document.getElementById("tooltip-4").classList.add("changetooltipdiv");
+	//	document.getElementById("tooltip-4").classList.remove("tooltipdiv");
+	//} else if (tth4 > (winInnerHeight / 2) + window.pageYOffset) {
+	//	document.getElementById("tooltip-4").classList.add("tooltipdiv");
+	//	document.getElementById("tooltip-4").classList.remove("changetooltipdiv");
+	//}
 }

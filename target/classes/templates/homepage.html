@@ -127,14 +127,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-5 order-1 order-md-2">
+			<div class="col-md-5 order-1 order-md-2 my-5">
 				<div class="container row">
 					<div id="stepbox" class="col-sm-12 d-flex align-items-center justify-content-center flex-column">
 						<div id="tooltip-1" class="row tooltipdiv justify-content-center align-items-center">
 							<h4 class="text-center font2 my-0">Sign-Up your Account</h4>
-							<a sec:authorize="isAnonymous()" href="/login" class="p-0 mx-auto"
+							<!-- <a sec:authorize="isAnonymous()" href="/login" class="p-0 mx-auto"
 								style="width: fit-content; "><button type="button"
-									class="btn btn-outline-danger m-0">Sign-Up</button></a>
+									class="btn btn-outline-danger m-0">Sign-Up</button></a> -->
 						</div>
 						<div class="progressbar">
 							<div id="mybar-1"></div>
@@ -142,7 +142,7 @@
 						<div id="tooltip-2" class="row tooltipdiv justify-content-center align-items-center">
 							<h4 class="text-center font2">Talk with Mentor</h4>
 						</div>
-						<div class="progressbar">
+						<!-- <div class="progressbar">
 							<div id="mybar-2"></div>
 						</div>
 						<div id="tooltip-3" class="row tooltipdiv justify-content-center align-items-center">
@@ -153,7 +153,7 @@
 						</div>
 						<div id="tooltip-4" class="row tooltipdiv justify-content-center align-items-center">
 							<h4 class="text-center font2">Meet Us and Learn</h4>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -163,7 +163,7 @@
 	<!-- Footer -->
 	<footer class="text-center text-lg-start bg-light text-muted">
 		<!-- Section: Social media -->
-		<section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+		<section class="d-flex justify-content-center justify-content-lg-between p-2 border-bottom">
 			<!-- Left -->
 			<div class="me-5 d-none d-lg-block">
 				<span>Get connected with us on social networks:</span>
@@ -192,7 +192,7 @@
 
 		<!-- Section: Links  -->
 		<section class="">
-			<div class="container text-center text-md-start mb-3 mt-4">
+			<div class="container text-center text-md-start mt-4">
 				<!-- Grid row -->
 				<div class="row">
 					<!-- Grid column -->
@@ -265,12 +265,17 @@
 		<!-- Section: Links  -->
 
 		<!-- Copyright -->
-		<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-			© 2021 Copyright:
-			<a class="text-reset fw-bold" target="_blank" href="https://techno-hub.org/">Techno-Hub</a>
-			All Rights Reserved
-		</div>
-		<!-- Copyright -->
+        <div class="text-center p-3 d-flex" style="font-size: .85rem; background-color: rgba(0, 0, 0, 0.05); justify-content: space-between;">
+        	<div>
+        		<a class="text-muted text-decoration-none" href="/tnc">Terms & Conditions</a>
+        	</div>
+        	<div class="text-justify">  © 2021 Copyright:
+	            <a class="text-reset fw-bold " target="_blank" href="https://techno-hub.org/">Techno-Hub</a>
+	            All Rights Reserved
+            </div>
+           
+        </div>
+        <!-- Copyright -->
 	</footer>
 	<!-- Footer -->
 

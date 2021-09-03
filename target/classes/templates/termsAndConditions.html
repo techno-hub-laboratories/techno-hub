@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!doctype html>
+<html lang="en">
 
 <head>
-	<noscript>
-		This page needs JavaScript activated to work.
-		<style>
-			div {
-				display: none;
-			}
-		</style>
-	</noscript>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
+	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Bootstrap CSS -->
@@ -23,15 +14,10 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-	<link rel="stylesheet" th:href="@{/css/adminDashboard.css}">
-
-	<!-- RazorPay Script -->
-	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" th:href="@{/images/favicon.png}" />
+
+	<link rel="stylesheet" th:href="@{/css/termsAndConditions.css}">
 
 	<!-- google fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,8 +25,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&family=Otomanopee+One&display=swap"
 		rel="stylesheet">
 
-	<title>Dashboard</title>
-
+	<title>Terms and Conditions</title>
 </head>
 
 <body>
@@ -57,96 +42,56 @@
 					<li class="nav-item mx-2">
 						<a class="nav-link active text-white" aria-current="page" href="/">Home</a>
 					</li>
-					<li class="nav-item mx-2">
-						<a class="nav-link text-white" href="/services">Services</a>
-					</li>
+					<!-- <li sec:authorize="isAuthenticated()" class="nav-item mx-2">
+						<a class="nav-link text-white" href="/services">Services</a> 
+					</li> -->
 					<li sec:authorize="isAuthenticated()" class="nav-item mx-2">
 						<form action="#" method="post" th:action="@{/user/profile}">
 							<button type="submit" class="nav-link text-white border-0"
 								style="background-color: transparent;">Profile</button>
 							<input type="text" name="Email" th:value="${#authentication.name}" hidden>
-                            <!-- <a class="nav-link text-white"
+							<!-- <a class="nav-link text-white"
 								th:href="@{~/profile/(username=${#authentication.name})}">Profile</a> -->
-                        </form>
-                    </li>
-                    <a sec:authorize="isAnonymous()" class="signinbtn my-3" href="/login">
-                        <button button type="button" class="btn btn-outline-warning ">
-                            <img src="https://img.icons8.com/ios-filled/22/000000/sign-up-in-calendar.png"
-                                alt="Sign-in Icon" class="d-inline-block align-text-middle" style="filter: invert(1);">
-                            Sign-In
-                        </button>
-                    </a>
-                    <a sec:authorize="isAuthenticated()" class="signoutbtn my-3" href="/logout">
-                        <button button type="button" class="btn btn-outline-warning ">
-                            <img src="https://img.icons8.com/ios-filled/22/000000/sign-up-in-calendar.png"
-                                alt="Sign-in Icon" class="d-inline-block align-text-middle" style="filter: invert(1);">
-                            Sign-Out
-                        </button>
-                    </a>
-                </ul>
-            </div>
-        </div>
-    </nav>
+						</form>
+					</li>
+					<a sec:authorize="isAnonymous()" class="signinbtn my-3" href="/login">
+						<button button type="button" class="btn btn-outline-warning ">
+							<img src="https://img.icons8.com/ios-filled/22/000000/sign-up-in-calendar.png"
+								alt="Sign-in Icon" class="d-inline-block align-text-middle" style="filter: invert(1);">
+							Sign-In
+						</button>
+					</a>
+					<a sec:authorize="isAuthenticated()" class="signoutbtn my-3" href="/logout">
+						<button button type="button" class="btn btn-outline-warning ">
+							<img src="https://img.icons8.com/ios-filled/22/000000/sign-up-in-calendar.png"
+								alt="Sign-in Icon" class="d-inline-block align-text-middle" style="filter: invert(1);">
+							Sign-Out
+						</button>
+					</a>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container my-4" style="line-height: 2rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+		<div><b>Terms and Conditions</b></div>
+		<ul>
+			<li>After paying the registration fee you will get two sessions of Mentoring.</li>
+			<li>The company does not guarantee the admission of the mentee in any institution, college, university or
+				organization.</li>
+			<li>All the activities done on the website are purely professional and the company shouldn’t be held liable for
+				the activities done by the mentor and mentee outside the company.</li>
+			<li>As the Company evolves, our privacy policy will need to evolve as well to cover new situations. You are
+				advised to review this Policy regularly for any changes, as continued use is deemed approval of all changes.
+			</li>
+		</ul>
+		<div><b>Refund Policy</b></div>
+		<ul>
+			<li>All payments on this platform will be irrevocable, non-refundable, non-transferable and non-creditable.</li>
+			<li> The subscription once made cannot be cancelled.</li>
+		</ul>
+	</div>
 
-    <section class="container border my-2">
-        <div class="row">
-            <div class="col-md-4">
-                <h3 id="tagname-1">Category 1</h3>
-                <!-- <button id="btn-1" onclick="categorychange(1)" type="button"
-                    class="btn btn-primary removeoutline">Counseling</button>
-                <button id="btn-2" onclick="categorychange(2)" type="button"
-                    class="btn btn-outline-primary removeoutline">Coaching</button> -->
-                <button id="btn-3" onclick="categorychange(3)" type="button"
-                    class="btn btn-primary removeoutline">Mentorship</button>
-                <button id="btn-4" onclick="categorychange(4)" type="button"
-                    class="btn btn-outline-primary removeoutline">Guidance</button>
-            </div>
-            <div class="col-md-4">
-                <h3>Number of records</h3>
-                <button id="rec-1" type="button" onclick="recchange(1)"
-                    class="btn btn-primary removeoutline">10</button>
-                <button id="rec-2" type="button" onclick="recchange(2)"
-                    class="btn btn-outline-primary removeoutline">20</button>
-                <button id="rec-3" type="button" onclick="recchange(3)"
-                    class="btn btn-outline-primary removeoutline">30</button>
-                <button id="rec-4" type="button" onclick="recchange(4)"
-                    class="btn btn-outline-primary removeoutline">50</button>
-                <button id="rec-5" type="button" onclick="recchange(5)"
-                    class="btn btn-outline-primary removeoutline">All</button>
-            </div>
-            <div class="col-md-4">
-                <h3>Order By</h3>
-                <button id="ord-1" type="button" onclick="changeorder(1)"
-                    class="btn btn-primary removeoutline">Accending order</button>
-                <button id="ord-2" type="button" onclick="changeorder(2)"
-                    class="btn btn-outline-primary removeoutline">Decending order</button>
-            </div>
-        </div>
-        <button type="button" onclick="getdata()" class="btn btn-dark d-block"
-            style="width: fit-content; margin: 1rem auto;">Show</button>
-    </section>
-    <section class="mb-5 container border">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Category</th>
-                    <!-- <th scope="col">Mobile Number</th>
-                    <th scope="col">Subject</th> -->
-                    <th scope="col">Description</th>
-                </tr>
-            </thead>
-            <tbody id="tabledata">
-
-            </tbody>
-        </table>
-    </section>
-
-
-    
 	<!-- Footer -->
 	<footer class="text-center text-lg-start bg-light text-muted">
 		<!-- Section: Social media -->
@@ -265,15 +210,6 @@
         <!-- Copyright -->
 	</footer>
 	<!-- Footer -->
-
-    <script type="text/javascript" th:src="@{/js/adminDashboard.js}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

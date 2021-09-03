@@ -45,6 +45,11 @@ function checkemail() {
 				PayBtn.removeAttribute("disabled");
 			}
 			else {
+				Swal.fire(
+					'',
+					'E-Mail Already Exists',
+					'error'
+				)
 				PayBtn.setAttribute('disabled', 'disabled');
 			}
 		});
